@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.auto.AutoTest1;
 import frc.robot.commands.swerve.BalanceOnBeamCommand;
 import frc.robot.commands.swerve.DefaultDriveCommand;
 import frc.robot.commands.swerve.ZeroGyroCommand;
@@ -108,9 +109,9 @@ public class RobotContainer {
 
   }
 
-  // public Command getAutonomousCommand() {
-  // return
-  // }
+  public Command getAutonomousCommand() {
+    return new AutoTest1(drivebase);
+  }
 
   private static double deadband(double value, double deadband) {
     if (Math.abs(value) > deadband) {
