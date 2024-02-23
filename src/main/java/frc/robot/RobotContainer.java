@@ -1,16 +1,9 @@
 package frc.robot;
 
-import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.path.PathPlannerPath;
-import com.pathplanner.lib.util.PathPlannerLogging;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
-import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -54,34 +47,29 @@ public class RobotContainer {
   private final JoystickButton slowMode = new JoystickButton(driver, 6);
   private final JoystickButton slowerMode = new JoystickButton(driver, 5);
 
-  /* Subsystems */ 
+  /* Subsystems */
   private final DrivebaseSubsystem drivebase = new DrivebaseSubsystem();
- 
-  private SendableChooser<Command> autoChooser;
 
+  private SendableChooser<Command> autoChooser;
 
   // private final Field2d field;
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-      // field = new Field2d();
+    // field = new Field2d();
 
-      // PathPlannerLogging.setLogCurrentPoseCallback((pose)-> {
-      //   field.setRobotPose(pose);
-      // });
+    // PathPlannerLogging.setLogCurrentPoseCallback((pose)-> {
+    // field.setRobotPose(pose);
+    // });
 
-      // PathPlannerLogging.setLogTargetPoseCallback((pose) ->{
-      //   field.getObject("target pose").setPose(pose);
-      // });
+    // PathPlannerLogging.setLogTargetPoseCallback((pose) ->{
+    // field.getObject("target pose").setPose(pose);
+    // });
 
-      // PathPlannerLogging.setLogActivePathCallback((poses)->{
-      //   field.getObject("path").setPoses(poses);
-      // });
-
-    autoChooser = AutoBuilder.buildAutoChooser();
-    SmartDashboard.putData("auto mode", autoChooser);
-
+    // PathPlannerLogging.setLogActivePathCallback((poses)->{
+    // field.getObject("path").setPoses(poses);
+    // });
 
     drivebase.setDefaultCommand(
         new DefaultDriveCommand(
@@ -91,11 +79,8 @@ public class RobotContainer {
             () -> driverController.getRawAxis(rotationAxis),
             () -> robotOrianted.getAsBoolean(),
             () -> slowMode.getAsBoolean(),
-            () -> slowerMode.getAsBoolean()
-        ));
+            () -> slowerMode.getAsBoolean()));
 
-
-    
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -121,15 +106,11 @@ public class RobotContainer {
     zeroGyro.whileTrue(new ZeroGyroCommand(drivebase));
     balanceOnBeam.whileTrue(new BalanceOnBeamCommand(drivebase));
 
-  
   }
 
-   public Command getAutonomousCommand() {
-        PathPlannerPath path = PathPlannerPath.fromPathFile("deneme");
-
-        return AutoBuilder.followPath(path);
-    }
-
+  // public Command getAutonomousCommand() {
+  // return
+  // }
 
   private static double deadband(double value, double deadband) {
     if (Math.abs(value) > deadband) {
@@ -152,5 +133,5 @@ public class RobotContainer {
 
     return value;
   }
-  
+
 }
